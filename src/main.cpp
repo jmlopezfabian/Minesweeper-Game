@@ -1,6 +1,6 @@
 #include "../include/Board.h"
 
 int main(){
-    Board board(8,8,10);
+    Board board(8,8,15);
     board.show();
 }

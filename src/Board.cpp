@@ -1,29 +1,34 @@
 // Tablero.cpp
 
 #include "../include/Board.h"
-
+#include "../include/PairHash.h"
 
 Board::Board(int rows, int columns, int bombs) : rows(rows), columns(columns), bombs(bombs) {
-    // Inicializar el tablero y las minas
-    board.resize(rows, std::vector<int>(columns,0)); //Inicializamos todas las casillas con el valor 0
-    //Normal = 14 x 18 casilllas
-    //20 bombas
+    // Initialize the board and mines
+    board.resize(rows, std::vector<int>(columns,0)); //Initialize all cells with the value 0
+
 
     srand(time(NULL));
-    int x;
-    int y;
-
-    std::vector<int> coordinates_x(bombs);
-    std::vector<int> coordinates_y(bombs);
+    std::pair<int,int> position;
+    std::unordered_set<std::pair<int, int>, pair_hash> coordinates;
     //Generación aleatoria de las bombas
     for(int i=0;i<bombs; i++){
-        //Random generation of the coordinate x
-        x = rand() % columns;
+        do{
+            //Random generation of the coordinate x
+            position.first = rand() % columns;
+            
+            //Random generation of the coordinate y
+            position.second = rand() % rows;
+            
+            // Check if position have already been used
+            if(coordinates.find(position) == coordinates.end()) {
+                // If they have not been used, the bomb is set to the coordinates 
+                board[position.first][position.second] = 1;
+                coordinates.insert(position);
+                break;
+            }
 
-        //Random generation of the coordinate y
-        y = rand() % rows;
-
-        board[x][y] = 1;
+        }while(true);
     }
 }
 
