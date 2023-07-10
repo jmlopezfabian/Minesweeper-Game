@@ -10,9 +10,10 @@
 
 class Board {
     public:
-    Board(int rows, int columns, int bombs);
+    Board(int rows, int columns);
     void show();
     void clearCell(int row, int column);
+    void generateBombs(int bombs);
     // ...
 
     private:

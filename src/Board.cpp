@@ -3,10 +3,18 @@
 #include "../include/Board.h"
 #include "../include/PairHash.h"
 
-Board::Board(int rows, int columns, int bombs) : rows(rows), columns(columns), bombs(bombs) {
+Board::Board(int rows, int columns) : rows(rows), columns(columns) {
     // Initialize the board and mines
     board.resize(rows, std::vector<int>(columns,0)); //Initialize all cells with the value 0
+}
 
+void Board::generateBombs(int bombs) {
+    /*
+    The function takes the number of bombs as a parameter and uses a loop to 
+    generate unique random positions for each bomb. It utilizes the PairHash 
+    structure, which provides a custom hash function for coordinate pairs, 
+    to ensure that duplicate positions are avoided. 
+    */
 
     srand(time(NULL));
     std::pair<int,int> position;
