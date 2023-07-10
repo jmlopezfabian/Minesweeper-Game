@@ -13,7 +13,7 @@ class Board {
     Board(int rows, int columns);
     void show();
     void clearCell(int row, int column);
-    void generateBombs(int bombs);
+    void generateBombs(int bombs, std::pair<int,int> first_coordinate);
     // ...
 
     private:

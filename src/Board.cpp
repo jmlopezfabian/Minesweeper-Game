@@ -8,7 +8,7 @@ Board::Board(int rows, int columns) : rows(rows), columns(columns) {
     board.resize(rows, std::vector<char>(columns,'-')); //Initialize all cells with the value -
 }
 
-void Board::generateBombs(int bombs) {
+void Board::generateBombs(int bombs, std::pair<int,int> first_coordinate) {
     /*
     The function takes the number of bombs as a parameter and uses a loop to 
     generate unique random positions for each bomb. It utilizes the PairHash 
@@ -19,6 +19,7 @@ void Board::generateBombs(int bombs) {
     srand(time(NULL));
     std::pair<int,int> position;
     std::unordered_set<std::pair<int, int>, pair_hash> coordinates;
+    coordinates.insert(first_coordinate);
     //Generación aleatoria de las bombas
     for(int i=0;i<bombs; i++){
         do{
