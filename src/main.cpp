@@ -1,7 +1,8 @@
 #include "../include/Board.h"
 
 int main(){
-    Board board(8,8);
-    board.generateBombs(16);
+    Board board(10,12);
+    board.show();
+    board.generateBombs(8);
     board.show();
 }

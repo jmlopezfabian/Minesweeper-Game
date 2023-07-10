@@ -20,7 +20,7 @@ class Board {
     int rows;
     int columns;
     int bombs;
-    std::vector<std::vector<int>> board;
+    std::vector<std::vector<char>> board;
     // Other private members...
 };
 
