@@ -97,11 +97,20 @@ int Board::countBombsNearby(int row, int column){
             }
         }
     }
-
     //Case 5: The coordinate is on the bottom edge of the board but not at the corners.
     else if(row == rows-1 && column >= 1 && column < columns -1){
         for(int i=row-1; i<=rows-1; i++){
             for(int j=column-1; j<= column+1; j++){
+                if(board[i][j] == 'B'){
+                    count++;
+                }
+            }
+        }
+    }
+    //Case 6: The coordinate is on the left top corner
+    else if(row == 0 && column == 0){
+        for(int i=0; i<=row+1; i++){
+            for(int j=0; j<= column + 1; j++){
                 if(board[i][j] == 'B'){
                     count++;
                 }
