@@ -53,7 +53,29 @@ void Board::show() {
     }
 }
 
-void Board::clearCell(int fila, int columna) {
+int Board::countBombsNearby(int row, int column){
+    //Count the bombs close to a coordinate
+    
+    int count = 0;
+
+    //Case 1: The coordinate is not on the edge of the board
+    if (row >= 1 && row < rows-1 && column >= 1 && column < columns -1){ 
+        for(int i = row-1; i<= row+1; i++){
+            for(int j = column-1; j<= column+1; j++){
+                if(board[i][j] == 'B'){
+                    count ++;
+                } 
+            }
+        }    
+    }
+    //Case 2: 
+    else if()
+    return count;
+}
+
+void Board::clearCell(int row, int column) {
     // Clear the cell at the specified row and column
-    // ...
+    if(row >= 0 && row < rows && column >= 0 && column < columns){
+        board[row][column] = countBombsNearby(row, column) + '0';
+    }
 }
