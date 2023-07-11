@@ -54,11 +54,10 @@ void Board::show() {
 }
 
 int Board::countBombsNearby(int row, int column){
-    //Count the bombs close to a coordinate
-    
+    //Count the bombs close to a coordinate 
     int count = 0;
 
-    //Case 1: The coordinate is not on the edge of the board
+    //Case 1: The coordinate is not on the edge of the board (previously implemented). 
     if (row >= 1 && row < rows-1 && column >= 1 && column < columns -1){ 
         for(int i = row-1; i<= row+1; i++){
             for(int j = column-1; j<= column+1; j++){
@@ -68,8 +67,16 @@ int Board::countBombsNearby(int row, int column){
             }
         }    
     }
-    //Case 2: 
-    else if()
+    //Case 2: The coordinate is on the left edge of the board but not at the corners.
+    else if(column == 0 && row >= 1 && row < rows -1){
+        for(int i = row-1; i<= row+1; i++){
+            for(int j = 0; j<= column+1; j++){
+                if(board[i][j] == 'B'){
+                    count++;
+                }
+            }
+        }
+    }
     return count;
 }
 
