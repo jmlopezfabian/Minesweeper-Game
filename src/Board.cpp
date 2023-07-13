@@ -153,7 +153,7 @@ else if (row == rows - 1 && column == columns - 1) {
 void Board::clearCell(int row, int column) {
     // Clear the cell at the specified row and column
     if(row >= 0 && row < rows && column >= 0 && column < columns){
-        board[row][column] = countBombsNearby(row, column) + '0';
+        board[row][column] = 'X';
     }
 }
 
