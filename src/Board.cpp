@@ -166,3 +166,32 @@ void Board::countBombsNearbyAllCells(){
         }
     }
 }
+
+void Board::clearAdjacentZeroCells(int row, int column) {
+    std::queue<std::pair<int, int>> queue;
+    board[row][column] = 'X';
+    queue.push(std::make_pair(row, column));
+
+    while (!queue.empty()) {
+        std::pair<int, int> current = queue.front();
+        queue.pop();
+        int currentRow = current.first;
+        int currentColumn = current.second;
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if ((i == 0 && j != 0) || (i != 0 && j == 0)) {
+                    int adjacentRow = currentRow + i;
+                    int adjacentColumn = currentColumn + j;
+                    
+                    if (adjacentRow >= 0 && adjacentRow < rows && adjacentColumn >= 0 && adjacentColumn < columns) {
+                    
+                        if (board[adjacentRow][adjacentColumn] == '0') {
+                            board[adjacentRow][adjacentColumn] = 'X';
+                            queue.push(std::make_pair(adjacentRow, adjacentColumn));
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <time.h>
 #include <unordered_set>
+#include <queue>
 
 class Board {
     public:
@@ -16,6 +17,7 @@ class Board {
     void generateBombs(int bombs, std::pair<int,int> first_coordinate);
     int countBombsNearby(int row, int column);
     void countBombsNearbyAllCells();
+    void clearAdjacentZeroCells(int row, int column);
 
     private:
     int rows;
