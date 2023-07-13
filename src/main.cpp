@@ -12,5 +12,6 @@ int main(){
     
     board.generateBombs(11,first_coordinate);
     board.clearCell(first_coordinate.second,first_coordinate.first);
+    board.countBombsNearbyAllCells();
     board.show();
 }

@@ -15,6 +15,7 @@ class Board {
     void clearCell(int row, int column);
     void generateBombs(int bombs, std::pair<int,int> first_coordinate);
     int countBombsNearby(int row, int column);
+    void countBombsNearbyAllCells();
 
     private:
     int rows;
