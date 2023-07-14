@@ -6,6 +6,8 @@
 Board::Board(int rows, int columns) : rows(rows), columns(columns) {
     // Initialize the board and mines
     board.resize(rows, std::vector<char>(columns,'-')); //Initialize all cells with the value -
+    visibleCells.resize(rows, std::vector<bool>(columns, false));
+    markedCells.resize(rows,std::vector<bool>(columns, false));
 }
 
 void Board::generateBombs(int bombs, std::pair<int,int> first_coordinate) {
@@ -47,7 +49,15 @@ void Board::show() {
     std::cout<<"\n";
     for(int i=0; i<rows; i++){
         for(int j=0; j<columns; j++){
-            std::cout<<board[i][j]<<" ";
+            if(visibleCells[i][j]){
+                std::cout<<board[i][j]<<" ";
+            }
+            //else if(markedCells[i][j]){
+            //    std::cout<<"! ";
+            //}
+            else{
+                std::cout<<"- ";
+            }
         }
         std::cout<<"\n";
     }
@@ -153,7 +163,7 @@ else if (row == rows - 1 && column == columns - 1) {
 void Board::clearCell(int row, int column) {
     // Clear the cell at the specified row and column
     if(row >= 0 && row < rows && column >= 0 && column < columns){
-        board[row][column] = 'X';
+        visibleCells[row][column] = true;
     }
 }
 
@@ -169,7 +179,8 @@ void Board::countBombsNearbyAllCells(){
 
 void Board::clearAdjacentZeroCells(int row, int column) {
     std::queue<std::pair<int, int>> queue;
-    board[row][column] = 'X';
+    visibleCells[row][column] = true;
+
     queue.push(std::make_pair(row, column));
 
     while (!queue.empty()) {
@@ -177,6 +188,7 @@ void Board::clearAdjacentZeroCells(int row, int column) {
         queue.pop();
         int currentRow = current.first;
         int currentColumn = current.second;
+        
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 if ((i == 0 && j != 0) || (i != 0 && j == 0)) {
@@ -184,10 +196,11 @@ void Board::clearAdjacentZeroCells(int row, int column) {
                     int adjacentColumn = currentColumn + j;
                     
                     if (adjacentRow >= 0 && adjacentRow < rows && adjacentColumn >= 0 && adjacentColumn < columns) {
-                    
-                        if (board[adjacentRow][adjacentColumn] == '0') {
-                            board[adjacentRow][adjacentColumn] = 'X';
-                            queue.push(std::make_pair(adjacentRow, adjacentColumn));
+                        if (!visibleCells[adjacentRow][adjacentColumn] && board[adjacentRow][adjacentColumn] != 'B') {
+                            visibleCells[adjacentRow][adjacentColumn] = true;
+                            if (board[adjacentRow][adjacentColumn] == '0') {
+                                queue.push(std::make_pair(adjacentRow, adjacentColumn));
+                            }
                         }
                     }
                 }

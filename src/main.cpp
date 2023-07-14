@@ -3,7 +3,7 @@
 int main(){
     Board board(12,12);
     std::pair<int,int> first_coordinate;
-    std::cout<<"Ingresa la coordenada para iniciar el juego: ";
+    //std::cout<<"Ingresa la coordenada para iniciar el juego: ";
     std::cin>>first_coordinate.first>>first_coordinate.second;
     
     //Ajuste de coordenadas
@@ -14,5 +14,6 @@ int main(){
     board.countBombsNearbyAllCells();
     //board.clearCell(first_coordinate.second,first_coordinate.first);
     board.clearAdjacentZeroCells(first_coordinate.second, first_coordinate.first);
+    //board.clearCell(first_coordinate.second,first_coordinate.first);
     board.show();
 }

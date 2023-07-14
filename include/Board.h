@@ -24,7 +24,8 @@ class Board {
     int columns;
     int bombs;
     std::vector<std::vector<char>> board;
-    // Other private members...
+    std::vector<std::vector<bool>> visibleCells;
+    std::vector<std::vector<bool>> markedCells; //Guard cells that the player suspects are mines
 };
 
 #endif
