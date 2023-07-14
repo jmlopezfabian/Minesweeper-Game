@@ -52,9 +52,9 @@ void Board::show() {
             if(visibleCells[i][j]){
                 std::cout<<board[i][j]<<" ";
             }
-            //else if(markedCells[i][j]){
-            //    std::cout<<"! ";
-            //}
+            else if(markedCells[i][j]){
+                std::cout<<"! ";
+            }
             else{
                 std::cout<<"- ";
             }
@@ -205,6 +205,28 @@ void Board::clearAdjacentZeroCells(int row, int column) {
                     }
                 }
             }
+        }
+    }
+}
+
+bool Board::hasBomb(int row, int column){
+    return board[row][column] == 'B';
+}
+
+void Board::initializeRemainingCells() {
+    int totalCells = rows * columns;
+    remainingCells = totalCells - totalBombs;
+}
+
+bool Board::checkWinCondition() {
+    return remainingCells == 0;
+}
+
+void Board::revealCell(int row, int column) {
+    if (!visibleCells[row][column]) {
+        visibleCells[row][column] = true;
+        if (board[row][column] != 'B') {
+            remainingCells--;
         }
     }
 }
