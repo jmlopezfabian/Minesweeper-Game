@@ -8,6 +8,7 @@
 #include <time.h>
 #include <unordered_set>
 #include <queue>
+#include <iomanip>
 
 class Board {
     public:

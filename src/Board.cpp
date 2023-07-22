@@ -46,17 +46,27 @@ void Board::generateBombs(int bombs, std::pair<int,int> first_coordinate) {
 
 void Board::show() {
     // Show the current state of the board
+
+    int maxNumDigits = 2;
+    int cellWidth = maxNumDigits + 1;
+
+    std::cout<<"    ";
+    for(int j=0; j<columns; j++){
+        std::cout<<j+1<<"  ";
+    }
     std::cout<<"\n";
+
     for(int i=0; i<rows; i++){
+         std::cout << std::setw(2) << i+1 << "  ";
         for(int j=0; j<columns; j++){
             if(visibleCells[i][j]){
-                std::cout<<board[i][j]<<" ";
+                std::cout<<board[i][j]<<"  ";
             }
             else if(markedCells[i][j]){
-                std::cout<<"! ";
+                std::cout<<"!  ";
             }
             else{
-                std::cout<<"- ";
+                std::cout<<"-  ";
             }
         }
         std::cout<<"\n";
@@ -180,7 +190,8 @@ void Board::countBombsNearbyAllCells(){
 void Board::clearAdjacentZeroCells(int row, int column) {
     std::queue<std::pair<int, int>> queue;
     visibleCells[row][column] = true;
-
+    //board[row][column] = 'X';
+    
     queue.push(std::make_pair(row, column));
 
     while (!queue.empty()) {
