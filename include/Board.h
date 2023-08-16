@@ -9,6 +9,8 @@
 #include <unordered_set>
 #include <queue>
 #include <iomanip>
+#include <cstdlib>
+#include <map>
 
 class Board {
     public:
@@ -24,6 +26,8 @@ class Board {
     void initializeRemainingCells();
     int totalBombs;
     void revealCell(int row, int column);
+    bool revealedCell(int row, int column);
+    void toggleBombMark(int row, int column);
 
     private:
     int rows;

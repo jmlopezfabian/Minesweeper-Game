@@ -50,26 +50,33 @@ void Board::show() {
     int maxNumDigits = 2;
     int cellWidth = maxNumDigits + 1;
 
-    std::cout<<"    ";
+    std::cout<<"     ";
     for(int j=0; j<columns; j++){
-        std::cout<<j+1<<"  ";
+        if(j+1 >= 10){
+            std::cout<<j+1<<"  ";
+        }else
+            std::cout<<j+1<<"   ";
     }
-    std::cout<<"\n";
+    std::cout<<"\n\n\n";
 
     for(int i=0; i<rows; i++){
-         std::cout << std::setw(2) << i+1 << "  ";
+         std::cout << std::setw(2) << i+1 << "   ";
         for(int j=0; j<columns; j++){
             if(visibleCells[i][j]){
-                std::cout<<board[i][j]<<"  ";
+                if(board[i][j] == '0'){
+                    std::cout<<"🟩"<<"  ";
+                }else{
+                    std::cout<<board[i][j]<<"   ";
+                }
             }
             else if(markedCells[i][j]){
-                std::cout<<"!  ";
+                std::cout<<"🚩  ";
             }
             else{
-                std::cout<<"-  ";
+                std::cout<<"🔳  ";
             }
         }
-        std::cout<<"\n";
+        std::cout<<"\n\n";
     }
 }
 
@@ -240,4 +247,12 @@ void Board::revealCell(int row, int column) {
             remainingCells--;
         }
     }
+}
+
+bool Board::revealedCell(int row, int column){
+    return visibleCells[row][column];
+}
+
+void Board::toggleBombMark(int row, int column){
+    markedCells[row][column] = !markedCells[row][column];
 }
